@@ -96,7 +96,7 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
         return emptyLogoTextStackView
     }()
     
-    private let searchController = UISearchController(searchResultsController: nil)// nil, чтобы поиск не перекидывал на другой экран
+    private let searchController = UISearchController(searchResultsController: nil)
     
     private func setupUI() {
         view.backgroundColor = .white
@@ -107,14 +107,11 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
         let datePickerBarButtonItem = UIBarButtonItem(customView: datePicker)
         navigationItem.rightBarButtonItem = datePickerBarButtonItem
         
-        // Задаем текст заголовка (тоже не опциональное свойство контроллера)
         title = "Трекеры"
         
-        // Безопасно включаем большой заголовок у навигейшн бара через "if let"
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.prefersLargeTitles = true
             
-            //запомнить: настройка шрифта заголовка через словарь NSAttributeString!
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.systemFont(ofSize: 34, weight: .bold),
                 .foregroundColor: UIColor.blackTracker
@@ -144,27 +141,17 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
     
     
     private func addTracker(_ tracker: Tracker, titleOfCategory: String) {
-//        let updatedCategories: [TrackerCategory] = self.categories.map { category in
-//            if category.title == titleOfCategory {
-//                let newTrackerArray = category.arrayOfTrackers + [tracker]
-//                return TrackerCategory(title: titleOfCategory, arrayOfTrackers: newTrackerArray)
-//            } else {
-//                return category
-//            }
-//        }
-//        self.categories = updatedCategories
         if let index = categories.firstIndex(where: { $0.title == titleOfCategory }) {
-                let updatedCategory = TrackerCategory(
-                    title: titleOfCategory,
-                    arrayOfTrackers: categories[index].arrayOfTrackers + [tracker]
-                )
-                categories[index] = updatedCategory
-            } else {
-                categories.append(
-                    TrackerCategory(title: titleOfCategory, arrayOfTrackers: [tracker])
-                )
-            }
-        
+            let updatedCategory = TrackerCategory(
+                title: titleOfCategory,
+                arrayOfTrackers: categories[index].arrayOfTrackers + [tracker]
+            )
+            categories[index] = updatedCategory
+        } else {
+            categories.append(
+                TrackerCategory(title: titleOfCategory, arrayOfTrackers: [tracker])
+            )
+        }
     }
     
     
@@ -183,9 +170,6 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
     
     
     @objc private func plusButtonTapped() {
-//        let trackerCreationViewController = TrackersCreationViewController()
-//        trackerCreationViewController.delegate = self
-//        self.present(trackerCreationViewController, animated: true)
         createNewHabitVC()
     }
     
@@ -197,21 +181,17 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
     private func filterTrackersByDate() {
         let calendar = Calendar.current
         let weekDayNumber = calendar.component(.weekday, from: currentDate)
-        
-        // Переводим системный номер (где 1 — вс, 2 — пн...) в наш WeekDay enum
         guard let currentWeekDay = getWeekDay(from: weekDayNumber) else {
             return
         }
         
-        // 2. Фильтруем категории и трекеры (через наши любимые .filter и .map!)
         visibleCategories = categories.map { category in
             let filteredTrackers = category.arrayOfTrackers.filter { tracker in
                 tracker.schedule.contains(currentWeekDay)
             }
             return TrackerCategory(title: category.title, arrayOfTrackers: filteredTrackers)
-        }.filter { !$0.arrayOfTrackers.isEmpty } // Убираем пустые категории
+        }.filter { !$0.arrayOfTrackers.isEmpty }
         
-        // 3. Обновляем коллекцию! Если трекеров нет — показываем заглушку
         collectionView.reloadData()
         reloadPlaceholder()
     }
@@ -230,19 +210,12 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
     }
     
     func didTapConnectionButton(in cell: TrackerCollectionViewCell) {
-        // 1. Защита от будущей даты
         if Calendar.current.compare(currentDate, to: Date(), toGranularity: .day) == .orderedDescending {
             return
         }
-        
-        // 2. Находим, по какому именно трекеру кликнули
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let tracker = visibleCategories[indexPath.section].arrayOfTrackers[indexPath.row]
-        
-        // 3. Вызываем ваш готовый метод, который сам добавит или удалит запись из истории!
         trackerCompletion(id: UInt(tracker.id))
-        
-        // 4. Перерисовываем ТОЛЬКО эту ячейку, чтобы обновился счетчик дней и картинка
         collectionView.reloadItems(at: [indexPath])
     }
     
@@ -267,29 +240,25 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
             presentNewHabit()
         }
     }
-
+    
     private func presentNewHabit() {
         let vc = NewHabitViewController()
         vc.delegate = self
         present(vc, animated: true)
     }
-    
-    
 }
 
 
 
 extension TrackersViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Высчитываем ширину экрана минус отступы по краям (по 16pt) и минус расстояние между ячейками (9pt)
-        let availableWidth = collectionView.frame.width - 16 - 16 - 9
-        let cellWidth = availableWidth / 2 // Делим на 2, чтобы получилось ровно две колонки
         
-        // Высота карточки трекера по макету Фигмы обычно равна 148pt
+        let availableWidth = collectionView.frame.width - 16 - 16 - 9
+        let cellWidth = availableWidth / 2
+        
         return CGSize(width: cellWidth, height: 148)
     }
     
-    // Отступы для всей секции целиком (чтобы карточки не прилипали к краям телефона)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let isLastSection = section == visibleCategories.count - 1
         return UIEdgeInsets(top: 0, left: 16, bottom: isLastSection ? 16 : 0, right: 16)
@@ -326,17 +295,13 @@ extension TrackersViewController: UICollectionViewDataSource {
         let tracker = visibleCategories[indexPath.section].arrayOfTrackers[indexPath.row]
         cell.delegate = self
         
-        // Проверяем, выполнена ли эта привычка ИМЕННО СЕГОДНЯ
         let dateWithoutTime = Calendar.current.startOfDay(for: currentDate)
         let isCompleted = completedTrackers.contains(where: { $0.id == tracker.id && $0.date == dateWithoutTime })
         
-        // Считаем, сколько ВСЕГО раз этот трекер был выполнен за всю историю
         let completedDaysCount = completedTrackers.filter { $0.id == tracker.id }.count
         
-        // Проверяем, доступна ли кнопка (не будущая ли дата)
         let isTodayOrPast = Calendar.current.compare(currentDate, to: Date(), toGranularity: .day) != .orderedDescending
         
-        // Передаем все данные в ячейку
         cell.configure(with: tracker, isCompleted: isCompleted, completedDaysCount: completedDaysCount, isEnabled: isTodayOrPast)
         
         return cell
@@ -345,13 +310,13 @@ extension TrackersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader,
               let header = collectionView.dequeueReusableSupplementaryView(
-                  ofKind: kind,
-                  withReuseIdentifier: TrackerSectionHeaderView.reuseIdentifier,
-                  for: indexPath
+                ofKind: kind,
+                withReuseIdentifier: TrackerSectionHeaderView.reuseIdentifier,
+                for: indexPath
               ) as? TrackerSectionHeaderView else {
             return UICollectionReusableView()
         }
-
+        
         header.configure(
             title: visibleCategories[indexPath.section].title,
             topPadding: indexPath.section == 0 ? 34 : 24
@@ -363,10 +328,8 @@ extension TrackersViewController: UICollectionViewDataSource {
 
 extension TrackersViewController: NewHabitViewControllerDelegate {
     func didCreateTracker(_ tracker: Tracker, toCategory title: String) {
-        // 1. Вызываем ВАШ метод addTracker, который вы написали ранее!
-        addTracker(tracker, titleOfCategory: title)
         
-        // 2. Пересчитываем фильтр, чтобы карточка сразу появилась на экране, если день недели совпадает
+        addTracker(tracker, titleOfCategory: title)
         filterTrackersByDate()
     }
 }

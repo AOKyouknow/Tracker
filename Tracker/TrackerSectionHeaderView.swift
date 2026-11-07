@@ -9,7 +9,7 @@ import UIKit
 
 final class TrackerSectionHeaderView: UICollectionReusableView {
     static let reuseIdentifier = "TrackerSectionHeaderView"
-
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
@@ -17,9 +17,9 @@ final class TrackerSectionHeaderView: UICollectionReusableView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private var topConstraint: NSLayoutConstraint!
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(titleLabel)
@@ -30,11 +30,11 @@ final class TrackerSectionHeaderView: UICollectionReusableView {
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -12)
         ])
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configure(title: String, topPadding: CGFloat) {
         titleLabel.text = title
         topConstraint.constant = topPadding

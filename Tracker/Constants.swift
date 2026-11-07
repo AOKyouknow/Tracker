@@ -10,5 +10,4 @@ import Foundation
 enum Constants {
     static let fontSFProBold = "SFPro-Bold"
     static let sizeOfTitle = 34
-    //static let trackersEmptyLogo = "TrackersEmptyLogo"
 }

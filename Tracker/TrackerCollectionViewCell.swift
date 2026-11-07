@@ -19,7 +19,6 @@ class TrackerCollectionViewCell: UICollectionViewCell {
         card.layer.cornerRadius = 16
         card.layer.masksToBounds = true
         
-        
         card.translatesAutoresizingMaskIntoConstraints = false
         return card
     }()
@@ -62,7 +61,6 @@ class TrackerCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         
         var configuration = UIButton.Configuration.plain()
-//        configuration.baseBackgroundColor = UIColor(resource: .selection1)
         configuration.baseForegroundColor = .white
         configuration.cornerStyle = .capsule
         configuration.image = UIImage(resource: .plus)
@@ -86,24 +84,16 @@ class TrackerCollectionViewCell: UICollectionViewCell {
             cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cardView.heightAnchor.constraint(equalToConstant: 90),
-
-            // эмодзи внутри карточки
             smileLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 12),
             smileLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 12),
             smileLabel.widthAnchor.constraint(equalToConstant: 24),
             smileLabel.heightAnchor.constraint(equalToConstant: 24),
-
-            // название внутри карточки
             titleOfTracker.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 12),
             titleOfTracker.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -12),
             titleOfTracker.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12),
-
-            // счётчик под карточкой, по центру кнопки
             amountOfDays.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             amountOfDays.centerYAnchor.constraint(equalTo: markButton.centerYAnchor),
             amountOfDays.trailingAnchor.constraint(lessThanOrEqualTo: markButton.leadingAnchor, constant: -8),
-
-            // кнопка под карточкой, справа, внутри ячейки
             markButton.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 8),
             markButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             markButton.widthAnchor.constraint(equalToConstant: 34),
@@ -127,13 +117,13 @@ class TrackerCollectionViewCell: UICollectionViewCell {
         
         markButton.isEnabled = isEnabled
         markButton.alpha = isEnabled ? 1.0 : 0.5
-
+        
         var config = markButton.configuration
         config?.image = UIImage(
             systemName: isCompleted ? "checkmark" : "plus",
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 12, weight: .bold)
         )
-
+        
         if isCompleted {
             config?.background.backgroundColor = tracker.color.withAlphaComponent(0.3)
             config?.baseForegroundColor = tracker.color
@@ -141,13 +131,12 @@ class TrackerCollectionViewCell: UICollectionViewCell {
             config?.background.backgroundColor = tracker.color
             config?.baseForegroundColor = .white
         }
-
+        
         markButton.configuration = config
-                
+        
         smileLabel.text = tracker.emoji
         
-        // Настройка счетчика дней
-        amountOfDays.text = "\(completedDaysCount) \(choiceOfdayWord(completedDaysCount))" // Здесь лучше использовать String.localizedStringWithFormat для склонений
+        amountOfDays.text = "\(completedDaysCount) \(choiceOfdayWord(completedDaysCount))"
         func choiceOfdayWord(_ daysCount: Int) -> String {
             switch daysCount {
             case 1:
@@ -158,21 +147,6 @@ class TrackerCollectionViewCell: UICollectionViewCell {
                 return "дней"
             }
         }
-        // Меняем картинку кнопки: плюс или галочка
-        
-        
-        
-        // Меняем прозрачность кнопки, если это будущая дата
-        
-        
     }
     
-//    private func randomColor() -> UIColor {
-//        let colorNames = ["selection 1", "selection 2", "selection 3"]
-//        guard let randomName = colorNames.randomElement() else {
-//            print("не найден цвет по имени")
-//            return .clear }
-//        return UIColor(named: randomName) ?? .clear
-//    }
-
 }

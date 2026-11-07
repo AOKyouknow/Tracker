@@ -24,26 +24,26 @@ final class TrackersCreationViewController: UIViewController {
         return label
     }()
     
-   private lazy var habitButton: UIButton = {
-       
-       var config = UIButton.Configuration.filled()
-       config.baseBackgroundColor = .blackTracker
-       config.baseForegroundColor = .white
-       config.background.cornerRadius = 16
-       let action = UIAction { [weak self] _ in
-           guard let self else { return }
-           self.delegate?.createNewHabitVC()
-           }
-       
-       var attributeContainer = AttributeContainer()
-       attributeContainer.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-       
-       config.attributedTitle = AttributedString("Привычка", attributes: attributeContainer)
-       
-       let button = UIButton(configuration: config, primaryAction: action)
-       
-       button.translatesAutoresizingMaskIntoConstraints = false
-       return button
+    private lazy var habitButton: UIButton = {
+        
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .blackTracker
+        config.baseForegroundColor = .white
+        config.background.cornerRadius = 16
+        let action = UIAction { [weak self] _ in
+            guard let self else { return }
+            self.delegate?.createNewHabitVC()
+        }
+        
+        var attributeContainer = AttributeContainer()
+        attributeContainer.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        
+        config.attributedTitle = AttributedString("Привычка", attributes: attributeContainer)
+        
+        let button = UIButton(configuration: config, primaryAction: action)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private lazy var unregularButton: UIButton = {
@@ -86,10 +86,4 @@ final class TrackersCreationViewController: UIViewController {
             titleVC.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-    
-    
-//    private func habitButtonTapped() {
-//        let vc = NewHabitViewController()
-//        self.present(vc, animated: true)
-//    }
 }

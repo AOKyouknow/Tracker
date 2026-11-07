@@ -22,7 +22,6 @@ class NewHabitViewController: UIViewController, SсheduleViewControllerDelegate 
         title.text = "Новая привычка"
         title.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         
-        
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
@@ -129,41 +128,23 @@ class NewHabitViewController: UIViewController, SсheduleViewControllerDelegate 
     }
     
     @objc private func createButtonTapped() {
-//        let trackerName = textField.text ?? "Без названия"
-//        
-//        // 2. Создаем новый объект трекера (id генерируем через случайное число, раз у вас UInt)
-//        let newTracker = Tracker(
-//            id: UInt(bitPattern: UUID().hashValue), // Безопасно делаем уникальный UInt из UUID
-//            name: trackerName,
-//            color: UIColor(resource: .selection1),
-//            emoji: "🌺",            // Здесь подставите выбранный эмодзи
-//            schedule: savedDays     // Передаем те самые дни, которые нащелкали во втором экране!
-//        )
-//        
-//        // 3. Отправляем трекер «по проводу» на главный экран в категорию «Важное»
-//        delegate?.didCreateTracker(newTracker, toCategory: "Важное")
-//        
-//        // 4. Закрываем текущий экран создания привычки
-//        self.dismiss(animated: true)
-        
         let trackerName = textField.text?
-               .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-
-           let finalSchedule = savedDays.isEmpty
-               ? Set(WeekDay.allCases)
-               : savedDays
-
-           let newTracker = Tracker(
-               id: UInt(bitPattern: UUID().hashValue),
-               name: trackerName.isEmpty ? "Без названия" : trackerName,
-               color: UIColor(resource: .greenTracker),
-               emoji: "😪",
-               schedule: finalSchedule
-           )
-
-           delegate?.didCreateTracker(newTracker, toCategory: "Домашний уют")
-           dismiss(animated: true)
-
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        
+        let finalSchedule = savedDays.isEmpty
+        ? Set(WeekDay.allCases)
+        : savedDays
+        
+        let newTracker = Tracker(
+            id: UInt(bitPattern: UUID().hashValue),
+            name: trackerName.isEmpty ? "Без названия" : trackerName,
+            color: UIColor(resource: .greenTracker),
+            emoji: "😪",
+            schedule: finalSchedule
+        )
+        
+        delegate?.didCreateTracker(newTracker, toCategory: "Домашний уют")
+        dismiss(animated: true)
     }
     
     private func goToSheduleViewController() {
@@ -203,7 +184,6 @@ extension NewHabitViewController: UITableViewDataSource {
         cell.backgroundConfiguration = background
         
         var configuration = UIListContentConfiguration.subtitleCell()
-        //var configuration = cell.defaultContentConfiguration()
         configuration.textProperties.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         configuration.textProperties.color = .blackTracker
         

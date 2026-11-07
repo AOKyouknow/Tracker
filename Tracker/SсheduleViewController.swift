@@ -27,8 +27,6 @@ enum WeekDay: String, CaseIterable {
         case .sunday: return "Вс"
         }
     }
-    
-    
 }
 
 protocol SсheduleViewControllerDelegate: AnyObject {
@@ -44,7 +42,6 @@ class SсheduleViewController: UIViewController {
         let title = UILabel()
         title.text = "Расписание"
         title.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        
         
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
@@ -89,7 +86,6 @@ class SсheduleViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleVC.topAnchor.constraint(equalTo: view.topAnchor, constant: 27),
             titleVC.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             tableView.topAnchor.constraint(equalTo: titleVC.bottomAnchor, constant: 30),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -98,8 +94,6 @@ class SсheduleViewController: UIViewController {
             readyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             readyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             readyButton.heightAnchor.constraint(equalToConstant: 60)
-        
-        
         ])
         
     }
@@ -141,7 +135,6 @@ extension SсheduleViewController: UITableViewDataSource {
         cell.contentConfiguration = configuration
         cell.backgroundConfiguration = backConfig
         
-//        cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         
         cell.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
