@@ -199,6 +199,9 @@ extension NewHabitViewController: UITableViewDataSource {
             configuration.text = "Расписание"
             if savedDays.isEmpty {
                 configuration.secondaryText = nil
+            } else if
+                Set(WeekDay.allCases).isSubset(of: savedDays) {
+                configuration.secondaryText = "Каждый день"
             } else {
                 let shortNames = WeekDay.allCases
                     .filter({savedDays.contains($0)})
