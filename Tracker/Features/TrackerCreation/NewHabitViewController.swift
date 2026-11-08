@@ -11,7 +11,7 @@ protocol NewHabitViewControllerDelegate: AnyObject {
     func didCreateTracker(_ tracker: Tracker, toCategory title: String)
 }
 
-class NewHabitViewController: UIViewController, SсheduleViewControllerDelegate {
+final class NewHabitViewController: UIViewController, ScheduleViewControllerDelegate {
     
     weak var delegate: NewHabitViewControllerDelegate?
     
@@ -147,7 +147,7 @@ class NewHabitViewController: UIViewController, SсheduleViewControllerDelegate 
     }
     
     private func goToSheduleViewController() {
-        let vc = SсheduleViewController()
+        let vc = ScheduleViewController()
         vc.delegate = self
         vc.selectedDays = self.savedDays
         self.present(vc, animated: true)

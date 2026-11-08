@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCreationViewControllerDelegate {
+final class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCreationViewControllerDelegate {
     
     var categories: [TrackerCategory] = []
     var visibleCategories: [TrackerCategory] = []
@@ -32,7 +32,7 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
     private var titleOfTab: UILabel = {
         let titleOfTab = UILabel()
         titleOfTab.text = "Трекеры"
-        titleOfTab.font = UIFont.systemFont(ofSize: CGFloat(Constants.sizeOfTitle), weight: .bold)
+        titleOfTab.font = UIFont.systemFont(ofSize: CGFloat(Asset.Font.sizeOfTitle), weight: .bold)
         titleOfTab.translatesAutoresizingMaskIntoConstraints = false
         
         return titleOfTab
@@ -221,11 +221,9 @@ class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCre
     
     private func reloadPlaceholder() {
         if visibleCategories.isEmpty {
-            // Если трекеров на сегодня нет — показываем заглушку, скрываем коллекцию
             emptyLogoTextStackView.isHidden = false
             collectionView.isHidden = true
         } else {
-            // Если трекеры есть — прячем заглушку, выводим коллекцию на передний план
             emptyLogoTextStackView.isHidden = true
             collectionView.isHidden = false
         }

@@ -11,7 +11,7 @@ protocol TrackerCellDelegate: AnyObject {
     func didTapConnectionButton(in cell: TrackerCollectionViewCell)
 }
 
-class TrackerCollectionViewCell: UICollectionViewCell {
+final class TrackerCollectionViewCell: UICollectionViewCell {
     weak var delegate: TrackerCellDelegate?
     
     private lazy var cardView: UIView = {

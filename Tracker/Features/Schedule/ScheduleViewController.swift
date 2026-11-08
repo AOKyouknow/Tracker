@@ -7,38 +7,14 @@
 
 import UIKit
 
-enum WeekDay: String, CaseIterable {
-    case monday = "Понедельник"
-    case tuesday = "Вторник"
-    case wednesday = "Среда"
-    case thursday = "Четверг"
-    case friday = "Пятница"
-    case saturday = "Суббота"
-    case sunday = "Воскресенье"
+final class ScheduleViewController: UIViewController {
     
-    var shortName: String {
-        switch self {
-        case .monday: return "Пн"
-        case .tuesday: return "Вт"
-        case .wednesday: return "Ср"
-        case .thursday: return "Чт"
-        case .friday: return "Пт"
-        case .saturday: return "Сб"
-        case .sunday: return "Вс"
-        }
-    }
-}
-
-protocol SсheduleViewControllerDelegate: AnyObject {
-    func didSelectDays(_ days: Set<WeekDay>)
-}
-
-class SсheduleViewController: UIViewController {
-    
-    weak var delegate: SсheduleViewControllerDelegate?
+    // MARK: - Properties
+    weak var delegate: ScheduleViewControllerDelegate?
     var selectedDays: Set<WeekDay> = []
     
-    private lazy var titleVC: UILabel = {
+    // MARK: - UI Elements
+    private lazy var titleLabel: UILabel = {
         let title = UILabel()
         title.text = "Расписание"
         title.font = UIFont.systemFont(ofSize: 16, weight: .medium)
@@ -75,18 +51,21 @@ class SсheduleViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupUI()
     }
     
+    // MARK: - Private Methods
     private func setupUI() {
         view.backgroundColor = .white
-        [tableView, titleVC, readyButton].forEach({view.addSubview($0)})
+        [tableView, titleLabel, readyButton].forEach({view.addSubview($0)})
         
         NSLayoutConstraint.activate([
-            titleVC.topAnchor.constraint(equalTo: view.topAnchor, constant: 27),
-            titleVC.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tableView.topAnchor.constraint(equalTo: titleVC.bottomAnchor, constant: 30),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 27),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableView.heightAnchor.constraint(equalToConstant: 525),
@@ -98,6 +77,7 @@ class SсheduleViewController: UIViewController {
         
     }
     
+    // MARK: - Actions
     @objc private func readyDidTapped() {
         delegate?.didSelectDays(selectedDays)
         self.dismiss(animated: true)
@@ -116,7 +96,8 @@ class SсheduleViewController: UIViewController {
     
 }
 
-extension SсheduleViewController: UITableViewDataSource {
+// MARK: - UITableViewDataSource
+extension ScheduleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         WeekDay.allCases.count
     }
@@ -156,7 +137,8 @@ extension SсheduleViewController: UITableViewDataSource {
     }
 }
 
-extension SсheduleViewController: UITableViewDelegate {
+// MARK: - UITableViewDelegate
+extension ScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let isLastRow = indexPath.row == WeekDay.allCases.count - 1
         
