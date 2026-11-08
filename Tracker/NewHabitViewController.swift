@@ -31,7 +31,7 @@ class NewHabitViewController: UIViewController, SсheduleViewControllerDelegate 
         textField.placeholder = "Введите название трекера"
         textField.layer.cornerRadius = 16
         textField.borderStyle = .none
-        textField.backgroundColor = .backgroundGray
+        textField.backgroundColor = .backgroundGray.withAlphaComponent(0.3)
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         textField.leftView = paddingView
         textField.leftViewMode = .always
@@ -43,7 +43,6 @@ class NewHabitViewController: UIViewController, SсheduleViewControllerDelegate 
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
-        table.backgroundColor = .backgroundGray
         table.layer.cornerRadius = 16
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -180,7 +179,7 @@ extension NewHabitViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         var background = UIBackgroundConfiguration.clear()
-        background.backgroundColor = .backgroundGray
+        background.backgroundColor = .backgroundGray.withAlphaComponent(0.3)
         cell.backgroundConfiguration = background
         
         var configuration = UIListContentConfiguration.subtitleCell()

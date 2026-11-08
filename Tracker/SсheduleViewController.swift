@@ -126,7 +126,7 @@ extension SсheduleViewController: UITableViewDataSource {
         let currentDay = WeekDay.allCases[indexPath.row]
         
         var backConfig = UIBackgroundConfiguration.clear()
-        backConfig.backgroundColor = .backgroundGray
+        backConfig.backgroundColor = .backgroundGray.withAlphaComponent(0.3)
         
         var configuration = cell.defaultContentConfiguration()
         configuration.text = currentDay.rawValue
