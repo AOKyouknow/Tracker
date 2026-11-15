@@ -23,6 +23,8 @@
 		00283B0D309FA27B00B35034 /* TrackerSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B0C309FA27B00B35034 /* TrackerSectionHeaderView.swift */; };
 		00283B1630A096FC00B35034 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B1530A096FC00B35034 /* WeekDay.swift */; };
 		00283B1830A0988500B35034 /* ScheduleViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B1730A0988500B35034 /* ScheduleViewControllerDelegate.swift */; };
+		00283B3D30A7524200B35034 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B3C30A7524200B35034 /* UIColorExtension.swift */; };
+		00283B3F30A7755B00B35034 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B3E30A7755B00B35034 /* ColorCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		00283B0C309FA27B00B35034 /* TrackerSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerSectionHeaderView.swift; sourceTree = "<group>"; };
 		00283B1530A096FC00B35034 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		00283B1730A0988500B35034 /* ScheduleViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewControllerDelegate.swift; sourceTree = "<group>"; };
+		00283B3C30A7524200B35034 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		00283B3E30A7755B00B35034 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 			children = (
 				00283B043097906200B35034 /* TrackersCreationViewController.swift */,
 				00283B0630979F8500B35034 /* NewHabitViewController.swift */,
+				00283B3E30A7755B00B35034 /* ColorCollectionViewCell.swift */,
 			);
 			path = TrackerCreation;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				00283AA8308A86EF00B35034 /* Assets.xcassets */,
+				00283B3C30A7524200B35034 /* UIColorExtension.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -240,8 +246,10 @@
 				00283AB6308E46A000B35034 /* Asset.swift in Sources */,
 				00283AA4308A86ED00B35034 /* TrackersViewController.swift in Sources */,
 				00283AB4308CB30600B35034 /* TabBarController.swift in Sources */,
+				00283B3F30A7755B00B35034 /* ColorCollectionViewCell.swift in Sources */,
 				00283B0730979F8500B35034 /* NewHabitViewController.swift in Sources */,
 				00283AA0308A86ED00B35034 /* AppDelegate.swift in Sources */,
+				00283B3D30A7524200B35034 /* UIColorExtension.swift in Sources */,
 				00283B09309B9E6200B35034 /* ScheduleViewController.swift in Sources */,
 				00283AA2308A86ED00B35034 /* SceneDelegate.swift in Sources */,
 				00283B0130973FA000B35034 /* TrackerCategory.swift in Sources */,

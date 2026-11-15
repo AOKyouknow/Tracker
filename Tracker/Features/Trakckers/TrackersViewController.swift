@@ -9,16 +9,14 @@ import UIKit
 
 final class TrackersViewController: UIViewController, TrackerCellDelegate, TrackersCreationViewControllerDelegate {
     
+    // MARK: - Properties
+    
     var categories: [TrackerCategory] = []
     var visibleCategories: [TrackerCategory] = []
     var completedTrackers: Set<TrackerRecord> = []
     var currentDate: Date = Date()
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-    }
+    // MARK: - UI Elements
     
     private lazy var navBarItem: UIBarButtonItem = {
         let navBarItem = UIBarButtonItem()
@@ -96,7 +94,16 @@ final class TrackersViewController: UIViewController, TrackerCellDelegate, Track
         return emptyLogoTextStackView
     }()
     
-    private let searchController = UISearchController(searchResultsController: nil)
+    private lazy var searchController = UISearchController(searchResultsController: nil)
+    
+    // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+    
+    // MARK: - Private Methods
     
     private func setupUI() {
         view.backgroundColor = .white
@@ -169,15 +176,6 @@ final class TrackersViewController: UIViewController, TrackerCellDelegate, Track
     }
     
     
-    @objc private func plusButtonTapped() {
-        createNewHabitVC()
-    }
-    
-    @objc private func dateChanged(_ sender: UIDatePicker) {
-        self.currentDate = sender.date
-        filterTrackersByDate()
-    }
-    
     private func filterTrackersByDate() {
         let calendar = Calendar.current
         let weekDayNumber = calendar.component(.weekday, from: currentDate)
@@ -244,9 +242,21 @@ final class TrackersViewController: UIViewController, TrackerCellDelegate, Track
         vc.delegate = self
         present(vc, animated: true)
     }
+    
+    
+    // MARK: - Actions
+    
+    @objc private func plusButtonTapped() {
+        createNewHabitVC()
+    }
+    
+    @objc private func dateChanged(_ sender: UIDatePicker) {
+        self.currentDate = sender.date
+        filterTrackersByDate()
+    }
 }
 
-
+// MARK: - UICollectionViewDeleagateFlowLayout
 
 extension TrackersViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -273,7 +283,7 @@ extension TrackersViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
+// MARK: - UICollectionViewDataSource
 
 extension TrackersViewController: UICollectionViewDataSource {
     
@@ -323,6 +333,8 @@ extension TrackersViewController: UICollectionViewDataSource {
     }
     
 }
+
+// MARK: - NewHabitViewControllerDelegate
 
 extension TrackersViewController: NewHabitViewControllerDelegate {
     func didCreateTracker(_ tracker: Tracker, toCategory title: String) {
