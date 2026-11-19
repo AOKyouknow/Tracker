@@ -26,9 +26,7 @@ final class ColorCollectionViewCell: UICollectionViewCell {
             colorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
             colorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6),
             colorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
-//            colorView.heightAnchor.constraint(equalToConstant: 40),
-//            colorView.widthAnchor.constraint(equalToConstant: 40)
-        
+            
         ])
     }
     
@@ -37,17 +35,17 @@ final class ColorCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with color: UIColor) {
-            colorView.backgroundColor = color
-        }
+        colorView.backgroundColor = color
+    }
     
     func setSelected(_ isSelected: Bool, color: UIColor) {
-            if isSelected {
-                contentView.layer.borderWidth = 3
-                contentView.layer.cornerRadius = 8
-                contentView.layer.borderColor = color.withAlphaComponent(0.3).cgColor
-            } else {
-                contentView.layer.borderWidth = 0
-                contentView.layer.borderColor = nil
-            }
+        if isSelected {
+            contentView.layer.borderWidth = 3
+            contentView.layer.cornerRadius = 8
+            contentView.layer.borderColor = color.withAlphaComponent(0.3).cgColor
+        } else {
+            contentView.layer.borderWidth = 0
+            contentView.layer.borderColor = nil
         }
+    }
 }

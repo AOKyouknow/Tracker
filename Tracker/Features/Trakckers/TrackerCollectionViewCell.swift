@@ -112,7 +112,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with tracker: Tracker, isCompleted: Bool, completedDaysCount: Int, isEnabled: Bool) {
-        titleOfTracker.text = tracker.name
+        titleOfTracker.text = tracker.title
         cardView.backgroundColor = tracker.color
         
         markButton.isEnabled = isEnabled

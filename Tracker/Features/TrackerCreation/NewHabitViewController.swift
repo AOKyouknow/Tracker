@@ -168,8 +168,6 @@ final class NewHabitViewController: UIViewController, ScheduleViewControllerDele
     
     private func setupUI() {
         view.backgroundColor = .white
-        //        [titleLabel, textField, tableView, emojiCollectionView, colorsCollectionView, buttonStackView]
-        //            .forEach({view.addSubview($0)})
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -199,10 +197,6 @@ final class NewHabitViewController: UIViewController, ScheduleViewControllerDele
             colorsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             colorsCollectionView.heightAnchor.constraint(equalToConstant: 204),
             
-            //            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            //            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            //            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            //            buttonStackView.heightAnchor.constraint(equalToConstant: 60),
             
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -269,8 +263,8 @@ final class NewHabitViewController: UIViewController, ScheduleViewControllerDele
         : savedDays
         
         let newTracker = Tracker(
-            id: UInt(bitPattern: UUID().hashValue),
-            name: trackerName.isEmpty ? "Без названия" : trackerName,
+            id: UUID(),
+            title: trackerName.isEmpty ? "Без названия" : trackerName,
             color: selectedColor,
             emoji: selectedEmoji,
             schedule: finalSchedule
@@ -460,13 +454,11 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        // рассчитываю пространство незанятое отсутпами. место, где могут размещаться смайлики.
-        let itemsPerRow: CGFloat = 6 // количество колонок в сетке
+        let itemsPerRow: CGFloat = 6
         let horizontalInsets:CGFloat = 2 * 29
         let interItemSpacing: CGFloat = 5 * (itemsPerRow - 1)
         let availableWidth = collectionView.frame.width - horizontalInsets - interItemSpacing
         let place = availableWidth / itemsPerRow
-        //floor(availableWidth / itemsPerRow) // floor округляет дробное число строго вниз до целого
         
         return CGSize(width: place, height: place)
     }
@@ -495,7 +487,7 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
-        case emojiCollectionView: // пробую другую реализацию
+        case emojiCollectionView:
             selectedEmoji = emojiArray[indexPath.item]
             emojiCollectionView.reloadData()
         case colorsCollectionView:
