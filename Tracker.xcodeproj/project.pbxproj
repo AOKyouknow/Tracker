@@ -30,6 +30,7 @@
 		00283B5430ADC65200B35034 /* TrackerCategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B5330ADC65200B35034 /* TrackerCategoryStore.swift */; };
 		00283B5630ADC66900B35034 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B5530ADC66900B35034 /* TrackerRecordStore.swift */; };
 		00283B5830AF747400B35034 /* UIColorMarshalling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00283B5730AF747400B35034 /* UIColorMarshalling.swift */; };
+		00FAD2F630B036380037B91B /* DataBaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAD2F530B036380037B91B /* DataBaseStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		00283B5330ADC65200B35034 /* TrackerCategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategoryStore.swift; sourceTree = "<group>"; };
 		00283B5530ADC66900B35034 /* TrackerRecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStore.swift; sourceTree = "<group>"; };
 		00283B5730AF747400B35034 /* UIColorMarshalling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorMarshalling.swift; sourceTree = "<group>"; };
+		00FAD2F530B036380037B91B /* DataBaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 				00283B5130ADC62F00B35034 /* TrackerStore.swift */,
 				00283B5330ADC65200B35034 /* TrackerCategoryStore.swift */,
 				00283B5530ADC66900B35034 /* TrackerRecordStore.swift */,
+				00FAD2F530B036380037B91B /* DataBaseStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				00283B0330973FB200B35034 /* TrackerRecord.swift in Sources */,
 				00283B1830A0988500B35034 /* ScheduleViewControllerDelegate.swift in Sources */,
 				00283B0D309FA27B00B35034 /* TrackerSectionHeaderView.swift in Sources */,
+				00FAD2F630B036380037B91B /* DataBaseStore.swift in Sources */,
 				00283AB6308E46A000B35034 /* Asset.swift in Sources */,
 				00283AA4308A86ED00B35034 /* TrackersViewController.swift in Sources */,
 				00283AB4308CB30600B35034 /* TabBarController.swift in Sources */,
@@ -492,7 +496,6 @@
 				00283B4330A9DC6200B35034 /* CoreDataModels.xcdatamodel */,
 			);
 			currentVersion = 00283B4330A9DC6200B35034 /* CoreDataModels.xcdatamodel */;
-			name = CoreDataModels.xcdatamodeld;
 			path = CoreDataModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
