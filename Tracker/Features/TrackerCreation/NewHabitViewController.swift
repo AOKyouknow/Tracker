@@ -19,20 +19,7 @@ final class NewHabitViewController: UIViewController, ScheduleViewControllerDele
     
     private var savedDays: Set<WeekDay> = []
     private var selectedEmoji: String?
-    private var selectedColor: UIColor? // selectedColorHex - нет такой переменной.
-    //private var selectedColorHex: String?
-    
-    private let emojiArray: [String] = [
-        "🙂", "😻", "🌺", "🐶", "❤️", "😱",
-        "😇", "😡", "🥶", "🤔", "🙌", "🍔",
-        "🥦", "🏓", "🥇", "🎸", "🏝", "😪"
-    ]
-    
-    private let colorHexes: [String] = [
-        "#FD4C49", "#FF881E", "#007BFA", "#6E44FE", "#33CF69", "#E66DD4",
-        "#F9D4D4", "#34A7FE", "#46E69D", "#35347C", "#FF674D", "#FF99CC",
-        "#F6C48B", "#7994F5", "#832CF1", "#AD56DA", "#8D72E6", "#2FD058"
-    ]
+    private var selectedColor: UIColor?
     
     //MARK: - UI Elements
     
@@ -371,9 +358,9 @@ extension NewHabitViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == emojiCollectionView {
-            return emojiArray.count
+            return Asset.emojiArray.count
         } else {
-            return colorHexes.count
+            return Asset.colorHexes.count
         }
         
     }
@@ -382,7 +369,7 @@ extension NewHabitViewController: UICollectionViewDataSource {
         
         if collectionView == emojiCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath)
-            let emojiItem = emojiArray[indexPath.item]
+            let emojiItem = Asset.emojiArray[indexPath.item]
             
             var content = UIListContentConfiguration.cell()
             content.text = emojiItem
@@ -401,7 +388,7 @@ extension NewHabitViewController: UICollectionViewDataSource {
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorCell", for: indexPath) as? ColorCollectionViewCell else { return UICollectionViewCell() }
             
-            let color = UIColor(hex: colorHexes[indexPath.item])
+            let color = UIColor(hex: Asset.colorHexes[indexPath.item])
             cell.configure(with: color)
             
             cell.setSelected(color == selectedColor, color: color)
@@ -488,10 +475,10 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case emojiCollectionView:
-            selectedEmoji = emojiArray[indexPath.item]
+            selectedEmoji = Asset.emojiArray[indexPath.item]
             emojiCollectionView.reloadData()
         case colorsCollectionView:
-            let hex = colorHexes[indexPath.item]
+            let hex = Asset.colorHexes[indexPath.item]
             selectedColor = UIColor(hex: hex)
             colorsCollectionView.reloadData()
         default:
