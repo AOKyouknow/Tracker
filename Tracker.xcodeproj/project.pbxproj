@@ -127,19 +127,19 @@
 			children = (
 				00283B1230A0938D00B35034 /* Schedule */,
 				00283B1130A0936100B35034 /* TrackerCreation */,
-				00283B1030A0933700B35034 /* Trakckers */,
+				00283B1030A0933700B35034 /* Trackers */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		00283B1030A0933700B35034 /* Trakckers */ = {
+		00283B1030A0933700B35034 /* Trackers */ = {
 			isa = PBXGroup;
 			children = (
 				00283AA3308A86ED00B35034 /* TrackersViewController.swift */,
 				00283B0A309E1E2E00B35034 /* TrackerCollectionViewCell.swift */,
 				00283B0C309FA27B00B35034 /* TrackerSectionHeaderView.swift */,
 			);
-			path = Trakckers;
+			path = Trackers;
 			sourceTree = "<group>";
 		};
 		00283B1130A0936100B35034 /* TrackerCreation */ = {
@@ -493,7 +493,7 @@
 			);
 			currentVersion = 00283B4330A9DC6200B35034 /* CoreDataModels.xcdatamodel */;
 			name = CoreDataModels.xcdatamodeld;
-			path = /Users/a/Documents/Projects/Tracker/Tracker/Models/CoreDataModels.xcdatamodeld;
+			path = CoreDataModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
