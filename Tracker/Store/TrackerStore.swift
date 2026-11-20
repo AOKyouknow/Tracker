@@ -20,7 +20,6 @@ protocol TrackerStoreDelegate: AnyObject {
 final class TrackerStore: NSObject {
     weak var delegate: TrackerStoreDelegate?
     
-    private let colorMarshalling = UIColorMarshalling()
     private let context: NSManagedObjectContext
     
     private lazy var fetchedResultsController: NSFetchedResultsController<TrackerCoreData> = {
@@ -67,7 +66,7 @@ final class TrackerStore: NSObject {
         trackerCoreData.id = tracker.id
         trackerCoreData.title = tracker.title
         trackerCoreData.emoji = tracker.emoji
-        trackerCoreData.colorHex = colorMarshalling.hexString(from: tracker.color)
+        trackerCoreData.colorHex = UIColorMarshalling.hexString(from: tracker.color)
         trackerCoreData.schedule = tracker.schedule.map { $0.rawValue } as NSObject
         trackerCoreData.category = category
         
@@ -85,7 +84,7 @@ final class TrackerStore: NSObject {
             throw TrackerStoreError.decodingErrorInvalidDate
         }
         let schedule = Set(scheduleRaw.compactMap { WeekDay(rawValue: $0) })
-        let color = colorMarshalling.color(from: colorHex)
+        let color = UIColorMarshalling.color(from: colorHex)
         return Tracker(id: id, title: title, color: color, emoji: emoji, schedule: schedule)
         
     }

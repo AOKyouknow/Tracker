@@ -357,12 +357,7 @@ extension NewHabitViewController: UITableViewDataSource {
 extension NewHabitViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == emojiCollectionView {
-            return Asset.emojiArray.count
-        } else {
-            return Asset.colorHexes.count
-        }
-        
+        collectionView == emojiCollectionView ? Asset.emojiArray.count : Asset.colorHexes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -428,8 +423,6 @@ extension NewHabitViewController: UICollectionViewDataSource {
     
     
 }
-
-
 
 
 // MARK: - UICollectionViewDelegateFlowLayout
