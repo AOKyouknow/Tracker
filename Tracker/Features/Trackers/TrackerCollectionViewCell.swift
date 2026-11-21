@@ -103,8 +103,9 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        nil
     }
     
     @objc private func completeButtonTapped() {
@@ -112,7 +113,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with tracker: Tracker, isCompleted: Bool, completedDaysCount: Int, isEnabled: Bool) {
-        titleOfTracker.text = tracker.name
+        titleOfTracker.text = tracker.title
         cardView.backgroundColor = tracker.color
         
         markButton.isEnabled = isEnabled
